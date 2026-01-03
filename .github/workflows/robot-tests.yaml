@@ -3,6 +3,13 @@ name: Robot Framework Tests # Nombre visible en Actions
 on:
   repository_dispatch:
     types: [ run-tests ]      # Las pruebas son ejecutadas posterior al despliegue
+  
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "URL del entorno a probar"       # Se puede ejecutar las pruebas a demanda
+        required: true
+        default: "https://website-app-psi.vercel.app"
 
 permissions:
   contents: write
@@ -30,7 +37,7 @@ jobs:
 
     - name: Run Robot Framework tests     # Paso 5: Ejecución de tests
       run: |
-        python scripts/execute-tests.py --base-url=${{ github.event.client_payload.base_url }}
+        python scripts/execute-tests.py --base-url=${{ github.event.client_payload.base_url || github.event.inputs.base_url }} 
 
     - name: Upload Robot Framework results    # Paso 6: Aunque los tests fallen se sube los reportes
       if: always()      # Paso 6.1: Los archivos (artefactos) que se encuentren en la carpeta results se suben

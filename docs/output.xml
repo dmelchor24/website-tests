@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.0 (Python 3.11.14 on linux)" generated="2026-01-03T22:35:39.873100" rpa="false" schemaversion="5">
+<robot generator="Robot 7.0 (Python 3.11.14 on linux)" generated="2026-01-03T22:48:34.769800" rpa="false" schemaversion="5">
 <suite id="s1" name="Tests" source="/home/runner/work/website-tests/website-tests/tests">
 <suite id="s1-s1" name="Login" source="/home/runner/work/website-tests/website-tests/tests/login.robot">
 <kw name="Abrir Navegador" owner="common" type="SETUP">
 <kw name="Run Keyword If" owner="BuiltIn">
 <kw name="Abrir Navegador Headless" owner="common">
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2026-01-03T22:35:40.055503" level="INFO">Opening browser 'chrome' to base url 'https://website-app-psi.vercel.app'.</msg>
+<msg time="2026-01-03T22:48:34.968002" level="INFO">Opening browser 'chrome' to base url 'https://website-app-psi.vercel.app'.</msg>
 <arg>${BASE_URL}</arg>
 <arg>${BROWSER}</arg>
 <arg>options=add_argument("--headless")</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2026-01-03T22:35:40.055297" elapsed="7.667837"/>
+<status status="PASS" start="2026-01-03T22:48:34.967780" elapsed="12.132416"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2026-01-03T22:35:47.723396" elapsed="0.041048"/>
+<status status="PASS" start="2026-01-03T22:48:47.100576" elapsed="0.022166"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:35:40.055119" elapsed="7.709522"/>
+<status status="PASS" start="2026-01-03T22:48:34.967593" elapsed="12.155327"/>
 </kw>
 <arg>'${HEADLESS}' == 'true'</arg>
 <arg>Abrir Navegador Headless</arg>
 <arg>ELSE</arg>
 <arg>Abrir Navegador Visual</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2026-01-03T22:35:40.054840" elapsed="7.709920"/>
+<status status="PASS" start="2026-01-03T22:48:34.967293" elapsed="12.155718"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:35:40.054217" elapsed="7.710652"/>
+<status status="PASS" start="2026-01-03T22:48:34.966670" elapsed="12.156472"/>
 </kw>
 <test id="s1-s1-t1" name="Login exitoso con credenciales válidas" line="9">
 <kw name="Ingresar credenciales válidas" owner="common">
@@ -34,73 +34,73 @@
 <arg>${InputUsuario}</arg>
 <arg>${TIMEOUT10S}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-01-03T22:35:47.769975" elapsed="0.094555"/>
+<status status="PASS" start="2026-01-03T22:48:47.130866" elapsed="0.152896"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-01-03T22:35:47.865130" level="INFO">Typing text 'testuser' into text field 'id=username-input'.</msg>
+<msg time="2026-01-03T22:48:47.284382" level="INFO">Typing text 'testuser' into text field 'id=username-input'.</msg>
 <arg>${InputUsuario}</arg>
 <arg>${USERNAME}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-01-03T22:35:47.864813" elapsed="0.163792"/>
+<status status="PASS" start="2026-01-03T22:48:47.284042" elapsed="0.249800"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-01-03T22:35:48.029165" level="INFO">Typing text 'testpass123PQ' into text field 'id=password-input'.</msg>
+<msg time="2026-01-03T22:48:47.534406" level="INFO">Typing text 'testpass123PQ' into text field 'id=password-input'.</msg>
 <arg>${InputContrasena}</arg>
 <arg>${PASSWORD}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-01-03T22:35:48.028873" elapsed="0.078640"/>
+<status status="PASS" start="2026-01-03T22:48:47.534071" elapsed="0.091102"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:35:47.769673" elapsed="0.337992"/>
+<status status="PASS" start="2026-01-03T22:48:47.130598" elapsed="0.494771"/>
 </kw>
 <kw name="Hacer login" owner="common">
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2026-01-03T22:35:48.108398" level="INFO">Clicking button 'id=login-button'.</msg>
+<msg time="2026-01-03T22:48:47.626081" level="INFO">Clicking button 'id=login-button'.</msg>
 <arg>${BotonIniciarSesion}</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2026-01-03T22:35:48.108204" elapsed="0.151005"/>
+<status status="PASS" start="2026-01-03T22:48:47.625874" elapsed="0.182021"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:35:48.107909" elapsed="0.151439"/>
+<status status="PASS" start="2026-01-03T22:48:47.625582" elapsed="0.182454"/>
 </kw>
 <kw name="Validar Login Exitoso" owner="common">
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${BotonCerrarSesion}</arg>
 <arg>${TIMEOUT10S}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-01-03T22:35:48.259866" elapsed="3.430506"/>
+<status status="PASS" start="2026-01-03T22:48:47.808577" elapsed="3.438612"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:35:48.259552" elapsed="3.430951"/>
+<status status="PASS" start="2026-01-03T22:48:47.808242" elapsed="3.439102"/>
 </kw>
 <kw name="Hacer Logout" owner="common">
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2026-01-03T22:35:51.691191" level="INFO">Clicking button 'id=logout-button'.</msg>
+<msg time="2026-01-03T22:48:51.248126" level="INFO">Clicking button 'id=logout-button'.</msg>
 <arg>${BotonCerrarSesion}</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2026-01-03T22:35:51.691002" elapsed="0.060119"/>
+<status status="PASS" start="2026-01-03T22:48:51.247917" elapsed="0.068022"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:35:51.690720" elapsed="0.060527"/>
+<status status="PASS" start="2026-01-03T22:48:51.247596" elapsed="0.068524"/>
 </kw>
 <kw name="Validar Logout" owner="common">
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${BotonIniciarSesion}</arg>
 <arg>${TIMEOUT10S}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-01-03T22:35:51.751759" elapsed="1.082531"/>
+<status status="PASS" start="2026-01-03T22:48:51.316806" elapsed="1.424140"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:35:51.751446" elapsed="1.083010"/>
+<status status="PASS" start="2026-01-03T22:48:51.316392" elapsed="1.424686"/>
 </kw>
 <doc>Verifica que el usuario pueda iniciar sesión correctamente</doc>
-<status status="PASS" start="2026-01-03T22:35:47.769078" elapsed="5.065533"/>
+<status status="PASS" start="2026-01-03T22:48:47.130009" elapsed="5.611215"/>
 </test>
 <kw name="Cerrar Navegador" owner="common" type="TEARDOWN">
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2026-01-03T22:35:52.835730" elapsed="0.062981"/>
+<status status="PASS" start="2026-01-03T22:48:52.742114" elapsed="0.059643"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:35:52.835387" elapsed="0.063450"/>
+<status status="PASS" start="2026-01-03T22:48:52.741891" elapsed="0.059982"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:35:39.893110" elapsed="13.005769"/>
+<status status="PASS" start="2026-01-03T22:48:34.791558" elapsed="18.010362"/>
 </suite>
-<status status="PASS" start="2026-01-03T22:35:39.873916" elapsed="13.025590"/>
+<status status="PASS" start="2026-01-03T22:48:34.770660" elapsed="18.031979"/>
 </suite>
 <statistics>
 <total>

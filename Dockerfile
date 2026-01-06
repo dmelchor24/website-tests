@@ -1,5 +1,7 @@
 FROM python:3.11-slim
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 # -------------------------------
 # Dependencias del sistema
 # -------------------------------
@@ -18,7 +20,10 @@ RUN apt-get update && apt-get install -y \
     libgtk-3-0 \
     libdrm2 \
     libxshmfence1 \
-    --no-install-recommends
+    ca-certificates \
+    wget \
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
 
 ENV CHROME_BIN=/usr/bin/chromium
 ENV CHROMEDRIVER_PATH=/usr/bin/chromedriver

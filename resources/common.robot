@@ -3,6 +3,12 @@ Documentation    Funciones especificas
 Library    SeleniumLibrary
 Resource    ../elementos/elementos.robot
 Resource    ../variables/variables.robot
+Library    SeleniumLibrary
+Library    Collections
+Library    OperatingSystem
+Library    BuiltIn
+Library    Process
+Library    String
 
 *** Keywords ***
 Abrir Navegador
@@ -18,8 +24,12 @@ Abrir Navegador Visual
 #    Maximize Browser Window
 
 Abrir Navegador Headless
-    ${options}=    Create Dictionary
-    ...    args=--headless=new,--no-sandbox,--disable-dev-shm-usage,--disable-gpu,--window-size=1920,1080
+    ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+    Call Method    ${options}    add_argument    --headless=new
+    Call Method    ${options}    add_argument    --no-sandbox
+    Call Method    ${options}    add_argument    --disable-dev-shm-usage
+    Call Method    ${options}    add_argument    --disable-gpu
+    Call Method    ${options}    add_argument    --window-size=1920,1080
     Open Browser    ${BASE_URL}    ${BROWSER}    options=${options}
 
 Cerrar Navegador

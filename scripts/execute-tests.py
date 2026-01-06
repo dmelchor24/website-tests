@@ -36,7 +36,7 @@ print(f"🧪 Headless mode: {headless}")
 
 # Ejecutar Robot Framework
 command = [
-    "robot",
+    sys.executable, "-m", "robot",
     "--outputdir", results_dir,
     "--variable", f"BASE_URL:{base_url}",
     "--variable", f"HEADLESS:{headless}",

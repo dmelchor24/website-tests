@@ -19,20 +19,27 @@ docs_dir = "docs"
 os.makedirs(results_dir, exist_ok=True)
 os.makedirs(docs_dir, exist_ok=True)
 
-# BASE_URL por defecto para pruebas en local
-base_url = "http://127.0.0.1:5500"
+# BASE_URL por defecto para pruebas en local (prioridad: CLI > ENV > default)
+base_url = os.getenv("BASE_URL", "http://127.0.0.1:5500")
 
 # Leer argumento desde CLI (CI)
 for arg in sys.argv:
     if arg.startswith("--base-url="):
         base_url = arg.split("=", 1)[1]
 
+# HEADLESS (ENV > default)
+
+headless = os.getenv("HEADLESS", "true")
+
+print(f"🌐 Ejecutando pruebas contra: {base_url}")
+print(f"🧪 Headless mode: {headless}")
+
 # Ejecutar Robot Framework
 command = [
     "robot",
     "--outputdir", results_dir,
     "--variable", f"BASE_URL:{base_url}",
-    "--variable", "HEADLESS:true",
+    "--variable", f"HEADLESS:{headless}",
     "--report", report_file,
     "--log", log_file,
     "--output", output_file,

@@ -27,8 +27,7 @@ Abrir Navegador Headless
     Open Browser
     ...    ${BASE_URL}
     ...    ${BROWSER}
-    ...    options=add_argument:--headless=new;--no-sandbox;--disable-dev-shm-usage;--disable-gpu;--window-size=1920,1080
-
+    ...    chrome_options=--headless=new --no-sandbox --disable-dev-shm-usage --disable-gpu --window-size=1920,1080
 Cerrar Navegador
     Close Browser
 

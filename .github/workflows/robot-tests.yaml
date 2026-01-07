@@ -48,7 +48,6 @@ jobs:
         path: results/
 
     - name: Publish Robot Framework report to GitHub Pages    # Paso 7: Se publica el reporte en GitHub Pages
-      if: always()
       run: |
         if [ -d "docs" ] && [ "$(ls -A docs)" ]; then
           git config --global user.name "github-actions"

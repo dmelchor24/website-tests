@@ -26,16 +26,16 @@ Library    String
 Abrir Navegador
     ${chrome_options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
 
-    # Headless dinámico (CI vs local)
-    IF    '${HEADLESS}'=='true'
-        Call Method    ${chrome_options}    add_argument    --headless=new
-    END
-
+    # Argumentos básicos
     Call Method    ${chrome_options}    add_argument    --no-sandbox
     Call Method    ${chrome_options}    add_argument    --disable-dev-shm-usage
     Call Method    ${chrome_options}    add_argument    --disable-gpu
     Call Method    ${chrome_options}    add_argument    --disable-extensions
     Call Method    ${chrome_options}    add_argument    --window-size=1920,1080
+    
+    # Headless dinámico (CI vs local)
+    ${headless_arg}=    Set Variable    --headless=new
+    Run Keyword If    '${HEADLESS}'=='true'    Call Method    ${chrome_options}    add_argument    ${headless_arg}
 
     # Preferencias de Chrome
     ${prefs}=    Create Dictionary

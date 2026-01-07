@@ -23,7 +23,7 @@ Library    String
 #    Open Browser    ${BASE_URL}    ${BROWSER}    options=add_argument("--headless")
 #    Maximize Browser Window
 
-Configure Chrome Options
+Abrir Navegador
     ${chrome_options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
 
     # Headless dinámico (CI vs local)
@@ -42,7 +42,7 @@ Configure Chrome Options
     Call Method    ${chrome_options}    add_experimental_option    prefs    ${prefs}
 
     RETURN    ${chrome_options}
-    
+
 Cerrar Navegador
     Close Browser
 

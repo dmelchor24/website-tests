@@ -37,6 +37,7 @@ jobs:
           --shm-size=2g \
           -e BASE_URL=$BASE_URL \
           -v ${{ github.workspace }}/results:/robot/results \
+          -v ${{ github.workspace }}/docs:/robot/docs \
           robot-tests
 
     - name: Upload Robot Framework results    # Paso 6: Aunque los tests fallen se sube los reportes
@@ -49,8 +50,12 @@ jobs:
     - name: Publish Robot Framework report to GitHub Pages    # Paso 7: Se publica el reporte en GitHub Pages
       if: always()
       run: |
-        git config --global user.name "github-actions"
-        git config --global user.email "github-actions@github.com"
-        git add docs
-        git commit -m "Actualizacion: Reporte de Robot Framework" || echo "Sin ningun cambio"
-        git push
+        if [ -d "docs" ] && [ "$(ls -A docs)" ]; then
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add docs
+          git commit -m "Actualizacion: Reporte de Robot Framework" || echo "Sin ningun cambio"
+          git push
+        else
+          echo "⚠️ La carpeta docs/ está vacía o no existe"
+        fi

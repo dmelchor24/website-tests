@@ -54,8 +54,16 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add docs
-          git commit -m "Actualizacion: Reporte de Robot Framework" || echo "Sin ningun cambio"
-          git push
+          
+          # Solo hacer commit y push si hay cambios
+          if git diff --staged --quiet; then
+            echo "ℹ️ No hay cambios en los reportes"
+          else
+            git commit -m "Actualizacion: Reporte de Robot Framework"
+            git push
+            echo "✅ Reportes publicados en GitHub Pages"
+          fi
         else
           echo "⚠️ La carpeta docs/ está vacía o no existe"
+          exit 1
         fi

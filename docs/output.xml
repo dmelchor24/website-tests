@@ -1,32 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.0 (Python 3.11.14 on linux)" generated="2026-01-03T22:48:34.769800" rpa="false" schemaversion="5">
-<suite id="s1" name="Tests" source="/home/runner/work/website-tests/website-tests/tests">
-<suite id="s1-s1" name="Login" source="/home/runner/work/website-tests/website-tests/tests/login.robot">
+<robot generator="Robot 7.0 (Python 3.11.14 on linux)" generated="2026-01-07T04:10:01.716641" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="/robot/tests">
+<suite id="s1-s1" name="Login" source="/robot/tests/login.robot">
 <kw name="Abrir Navegador" owner="common" type="SETUP">
 <kw name="Run Keyword If" owner="BuiltIn">
 <kw name="Abrir Navegador Headless" owner="common">
-<kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2026-01-03T22:48:34.968002" level="INFO">Opening browser 'chrome' to base url 'https://website-app-psi.vercel.app'.</msg>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-01-07T04:10:01.870446" level="INFO">${chrome_options} = &lt;selenium.webdriver.chrome.options.Options object at 0x7f31422a2550&gt;</msg>
+<var>${chrome_options}</var>
+<arg>__import__('selenium.webdriver').webdriver.ChromeOptions()</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-01-07T04:10:01.870240" elapsed="0.000238"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<arg>$chrome_options.add_argument('--no-sandbox')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-01-07T04:10:01.870603" elapsed="0.002030"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<arg>$chrome_options.add_argument('--disable-dev-shm-usage')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-01-07T04:10:01.872751" elapsed="0.000174"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<arg>$chrome_options.add_argument('--disable-gpu')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-01-07T04:10:01.873028" elapsed="0.000150"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<arg>$chrome_options.add_argument('--disable-extensions')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-01-07T04:10:01.873305" elapsed="0.000158"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<arg>$chrome_options.add_argument('--window-size=1920,1080')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-01-07T04:10:01.873560" elapsed="0.000166"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Evaluate" owner="BuiltIn">
+<arg>$chrome_options.add_argument('--headless=new')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-01-07T04:10:01.874033" elapsed="0.000156"/>
+</kw>
+<arg>'${HEADLESS}'=='true'</arg>
+<arg>Evaluate</arg>
+<arg>$chrome_options.add_argument('--headless=new')</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2026-01-07T04:10:01.873837" elapsed="0.000402"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<arg>$chrome_options.add_experimental_option('prefs', {'profile.default_content_setting_values.notifications': 1})</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-01-07T04:10:01.874375" elapsed="0.000184"/>
+</kw>
+<kw name="Create Webdriver" owner="SeleniumLibrary">
+<msg time="2026-01-07T04:10:01.874821" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<arg>Chrome</arg>
+<arg>options=${chrome_options}</arg>
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<status status="PASS" start="2026-01-07T04:10:01.874660" elapsed="0.490163"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-01-07T04:10:02.365531" level="INFO">Opening url 'https://website-app-psi.vercel.app'</msg>
 <arg>${BASE_URL}</arg>
-<arg>${BROWSER}</arg>
-<arg>options=add_argument("--headless")</arg>
-<doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2026-01-03T22:48:34.967780" elapsed="12.132416"/>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-01-07T04:10:02.365202" elapsed="0.177744"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" start="2026-01-03T22:48:47.100576" elapsed="0.022166"/>
+<status status="PASS" start="2026-01-07T04:10:02.543210" elapsed="0.017085"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:48:34.967593" elapsed="12.155327"/>
+<status status="PASS" start="2026-01-07T04:10:01.870077" elapsed="0.690352"/>
 </kw>
 <arg>'${HEADLESS}' == 'true'</arg>
 <arg>Abrir Navegador Headless</arg>
 <arg>ELSE</arg>
 <arg>Abrir Navegador Visual</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2026-01-03T22:48:34.967293" elapsed="12.155718"/>
+<status status="PASS" start="2026-01-07T04:10:01.869766" elapsed="0.690731"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:48:34.966670" elapsed="12.156472"/>
+<status status="PASS" start="2026-01-07T04:10:01.868978" elapsed="0.691604"/>
 </kw>
 <test id="s1-s1-t1" name="Login exitoso con credenciales válidas" line="9">
 <kw name="Ingresar credenciales válidas" owner="common">
@@ -34,73 +88,73 @@
 <arg>${InputUsuario}</arg>
 <arg>${TIMEOUT10S}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-01-03T22:48:47.130866" elapsed="0.152896"/>
+<status status="PASS" start="2026-01-07T04:10:02.561697" elapsed="0.026054"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-01-03T22:48:47.284382" level="INFO">Typing text 'testuser' into text field 'id=username-input'.</msg>
+<msg time="2026-01-07T04:10:02.588429" level="INFO">Typing text 'testuser' into text field 'id=username-input'.</msg>
 <arg>${InputUsuario}</arg>
 <arg>${USERNAME}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-01-03T22:48:47.284042" elapsed="0.249800"/>
+<status status="PASS" start="2026-01-07T04:10:02.588064" elapsed="0.073676"/>
 </kw>
 <kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2026-01-03T22:48:47.534406" level="INFO">Typing text 'testpass123PQ' into text field 'id=password-input'.</msg>
+<msg time="2026-01-07T04:10:02.662413" level="INFO">Typing text 'testpass123PQ' into text field 'id=password-input'.</msg>
 <arg>${InputContrasena}</arg>
 <arg>${PASSWORD}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2026-01-03T22:48:47.534071" elapsed="0.091102"/>
+<status status="PASS" start="2026-01-07T04:10:02.662026" elapsed="0.079789"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:48:47.130598" elapsed="0.494771"/>
+<status status="PASS" start="2026-01-07T04:10:02.561363" elapsed="0.180609"/>
 </kw>
 <kw name="Hacer login" owner="common">
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2026-01-03T22:48:47.626081" level="INFO">Clicking button 'id=login-button'.</msg>
+<msg time="2026-01-07T04:10:02.742729" level="INFO">Clicking button 'id=login-button'.</msg>
 <arg>${BotonIniciarSesion}</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2026-01-03T22:48:47.625874" elapsed="0.182021"/>
+<status status="PASS" start="2026-01-07T04:10:02.742510" elapsed="0.081127"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:48:47.625582" elapsed="0.182454"/>
+<status status="PASS" start="2026-01-07T04:10:02.742184" elapsed="0.081646"/>
 </kw>
 <kw name="Validar Login Exitoso" owner="common">
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${BotonCerrarSesion}</arg>
 <arg>${TIMEOUT10S}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-01-03T22:48:47.808577" elapsed="3.438612"/>
+<status status="PASS" start="2026-01-07T04:10:02.824585" elapsed="3.334399"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:48:47.808242" elapsed="3.439102"/>
+<status status="PASS" start="2026-01-07T04:10:02.824112" elapsed="3.334997"/>
 </kw>
 <kw name="Hacer Logout" owner="common">
 <kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2026-01-03T22:48:51.248126" level="INFO">Clicking button 'id=logout-button'.</msg>
+<msg time="2026-01-07T04:10:06.159789" level="INFO">Clicking button 'id=logout-button'.</msg>
 <arg>${BotonCerrarSesion}</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2026-01-03T22:48:51.247917" elapsed="0.068022"/>
+<status status="PASS" start="2026-01-07T04:10:06.159601" elapsed="0.070052"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:48:51.247596" elapsed="0.068524"/>
+<status status="PASS" start="2026-01-07T04:10:06.159331" elapsed="0.070449"/>
 </kw>
 <kw name="Validar Logout" owner="common">
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>${BotonIniciarSesion}</arg>
 <arg>${TIMEOUT10S}</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="PASS" start="2026-01-03T22:48:51.316806" elapsed="1.424140"/>
+<status status="PASS" start="2026-01-07T04:10:06.230298" elapsed="1.405767"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:48:51.316392" elapsed="1.424686"/>
+<status status="PASS" start="2026-01-07T04:10:06.229980" elapsed="1.406266"/>
 </kw>
 <doc>Verifica que el usuario pueda iniciar sesión correctamente</doc>
-<status status="PASS" start="2026-01-03T22:48:47.130009" elapsed="5.611215"/>
+<status status="PASS" start="2026-01-07T04:10:02.560690" elapsed="5.075768"/>
 </test>
 <kw name="Cerrar Navegador" owner="common" type="TEARDOWN">
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2026-01-03T22:48:52.742114" elapsed="0.059643"/>
+<status status="PASS" start="2026-01-07T04:10:07.637494" elapsed="0.065652"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:48:52.741891" elapsed="0.059982"/>
+<status status="PASS" start="2026-01-07T04:10:07.637179" elapsed="0.066122"/>
 </kw>
-<status status="PASS" start="2026-01-03T22:48:34.791558" elapsed="18.010362"/>
+<status status="PASS" start="2026-01-07T04:10:01.738630" elapsed="5.964727"/>
 </suite>
-<status status="PASS" start="2026-01-03T22:48:34.770660" elapsed="18.031979"/>
+<status status="PASS" start="2026-01-07T04:10:01.717932" elapsed="5.986146"/>
 </suite>
 <statistics>
 <total>

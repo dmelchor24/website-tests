@@ -11,19 +11,20 @@ Library    Process
 Library    String
 
 *** Keywords ***
-#Abrir Navegador
-#    Run Keyword If    '${HEADLESS}' == 'true'    Abrir Navegador Headless
-#    ...               ELSE    Abrir Navegador Visual
-#Abrir Navegador Visual
-#    Open Browser    ${BASE_URL}    ${BROWSER}
-    #Set Window Size    1920    1080
-#    Maximize Browser Window
+Abrir Navegador
+    Run Keyword If    '${HEADLESS}' == 'true'    Abrir Navegador Headless
+    ...               ELSE    Abrir Navegador Visual
+
+Abrir Navegador Visual
+    Open Browser    ${BASE_URL}    ${BROWSER}
+    Set Window Size    1920    1080
+    Maximize Browser Window
 
 # Abrir Navegador Headless
 #    Open Browser    ${BASE_URL}    ${BROWSER}    options=add_argument("--headless")
 #    Maximize Browser Window
 
-Abrir Navegador
+Abrir Navegador Headless
     # Crear opciones base
     ${chrome_options}=    Evaluate    __import__('selenium.webdriver').webdriver.ChromeOptions()
     

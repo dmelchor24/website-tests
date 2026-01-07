@@ -11,23 +11,38 @@ Library    Process
 Library    String
 
 *** Keywords ***
-Abrir Navegador
-    Run Keyword If    '${HEADLESS}' == 'true'    Abrir Navegador Headless
-    ...               ELSE    Abrir Navegador Visual
-Abrir Navegador Visual
-    Open Browser    ${BASE_URL}    ${BROWSER}
+#Abrir Navegador
+#    Run Keyword If    '${HEADLESS}' == 'true'    Abrir Navegador Headless
+#    ...               ELSE    Abrir Navegador Visual
+#Abrir Navegador Visual
+#    Open Browser    ${BASE_URL}    ${BROWSER}
     #Set Window Size    1920    1080
-    Maximize Browser Window
+#    Maximize Browser Window
 
 # Abrir Navegador Headless
 #    Open Browser    ${BASE_URL}    ${BROWSER}    options=add_argument("--headless")
 #    Maximize Browser Window
 
-Abrir Navegador Headless
-    Open Browser
-    ...    ${BASE_URL}
-    ...    ${BROWSER}
-    ...    chrome_options=--headless=new --no-sandbox --disable-dev-shm-usage --disable-gpu --window-size=1920,1080
+Configure Chrome Options
+    ${chrome_options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+
+    # Headless dinámico (CI vs local)
+    Run Keyword If    '${HEADLESS}'=='true'    Call Method    ${chrome_options}    add_argument    --headless=new
+
+    Call Method    ${chrome_options}    add_argument    --no-sandbox
+    Call Method    ${chrome_options}    add_argument    --disable-dev-shm-usage
+    Call Method    ${chrome_options}    add_argument    --disable-gpu
+    Call Method    ${chrome_options}    add_argument    --disable-extensions
+    Call Method    ${chrome_options}    add_argument    --window-size=1920,1080
+
+    # Preferencias de Chrome
+    ${prefs}=    Create Dictionary
+    ...    profile.default_content_setting_values.notifications=1
+    ...    profile.default_content_setting_values.automatic_downloads=1
+    Call Method    ${chrome_options}    add_experimental_option    prefs    ${prefs}
+
+    RETURN    ${chrome_options}
+    
 Cerrar Navegador
     Close Browser
 

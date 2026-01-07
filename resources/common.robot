@@ -27,7 +27,9 @@ Abrir Navegador
     ${chrome_options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
 
     # Headless dinámico (CI vs local)
-    Run Keyword If    '${HEADLESS}'=='true'    Call Method    ${chrome_options}    add_argument    --headless=new
+    IF    '${HEADLESS}'=='true'
+        Call Method    ${chrome_options}    add_argument    --headless=new
+    END
 
     Call Method    ${chrome_options}    add_argument    --no-sandbox
     Call Method    ${chrome_options}    add_argument    --disable-dev-shm-usage

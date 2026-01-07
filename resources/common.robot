@@ -24,26 +24,26 @@ Library    String
 #    Maximize Browser Window
 
 Abrir Navegador
-    ${chrome_options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
-
-    # Argumentos básicos
-    Call Method    ${chrome_options}    add_argument    --no-sandbox
-    Call Method    ${chrome_options}    add_argument    --disable-dev-shm-usage
-    Call Method    ${chrome_options}    add_argument    --disable-gpu
-    Call Method    ${chrome_options}    add_argument    --disable-extensions
-    Call Method    ${chrome_options}    add_argument    --window-size=1920,1080
+    # Crear opciones base
+    ${chrome_options}=    Evaluate    __import__('selenium.webdriver').webdriver.ChromeOptions()
     
-    # Headless dinámico (CI vs local)
-    ${headless_arg}=    Set Variable    --headless=new
-    Run Keyword If    '${HEADLESS}'=='true'    Call Method    ${chrome_options}    add_argument    ${headless_arg}
-
-    # Preferencias de Chrome
-    ${prefs}=    Create Dictionary
-    ...    profile.default_content_setting_values.notifications=1
-    ...    profile.default_content_setting_values.automatic_downloads=1
-    Call Method    ${chrome_options}    add_experimental_option    prefs    ${prefs}
-
-    RETURN    ${chrome_options}
+    # Agregar argumentos usando Evaluate para cada uno
+    Evaluate    $chrome_options.add_argument('--no-sandbox')
+    Evaluate    $chrome_options.add_argument('--disable-dev-shm-usage')
+    Evaluate    $chrome_options.add_argument('--disable-gpu')
+    Evaluate    $chrome_options.add_argument('--disable-extensions')
+    Evaluate    $chrome_options.add_argument('--window-size=1920,1080')
+    
+    # Headless condicional
+    Run Keyword If    '${HEADLESS}'=='true'    
+    ...    Evaluate    $chrome_options.add_argument('--headless=new')
+    
+    # Preferencias
+    Evaluate    $chrome_options.add_experimental_option('prefs', {'profile.default_content_setting_values.notifications': 1})
+    
+    Create Webdriver    Chrome    options=${chrome_options}
+    Go To    ${BASE_URL}
+    Maximize Browser Window
 
 Cerrar Navegador
     Close Browser

@@ -15,19 +15,17 @@ permissions:
   contents: write
 
 jobs:
-  robot-tests:  # ID del job
-    runs-on: ubuntu-latest  # GitHub crea una VM
+  robot-tests:      # ID del job
+    runs-on: ubuntu-latest      # GitHub crea una VM
 
     steps:
-    - name: Checkout repository   # Paso 1: Descarga el código en la VM
+    - name: Checkout repository     # Paso 1: Descarga el código en la VM
       uses: actions/checkout@v4
     
-    # 🔹 Build de la imagen Docker con Robot Framework
-    - name: Build Robot Framework Docker image
+    - name: Build Robot Framework Docker image    # Paso 2: Build de la imagen Docker con Robot Framework
       run: docker build -t robot-tests .
     
-    # 🔹 Ejecutar pruebas dentro del contenedor
-    - name: Run Robot Framework tests
+    - name: Run Robot Framework tests      # Paso 3: Ejecutar pruebas dentro del contenedor
       run: |
         BASE_URL="${{ github.event.client_payload.base_url || github.event.inputs.base_url }}"
 
@@ -40,14 +38,14 @@ jobs:
           -v ${{ github.workspace }}/docs:/robot/docs \
           robot-tests
 
-    - name: Upload Robot Framework results    # Paso 6: Aunque los tests fallen se sube los reportes
-      if: always()      # Paso 6.1: Los archivos (artefactos) que se encuentren en la carpeta results se suben
+    - name: Upload Robot Framework results    # Paso 4: Aunque los tests fallen se sube los reportes
+      if: always()      # Paso 4.1: Los archivos (artefactos) que se encuentren en la carpeta results se suben
       uses: actions/upload-artifact@v4
       with:
         name: robot-results
         path: results/
 
-    - name: Publish Robot Framework report to GitHub Pages    # Paso 7: Se publica el reporte en GitHub Pages
+    - name: Publish Robot Framework report to GitHub Pages    # Paso 5: Se publica el reporte en GitHub Pages
       run: |
         if [ -d "docs" ] && [ "$(ls -A docs)" ]; then
           git config --global user.name "github-actions"
